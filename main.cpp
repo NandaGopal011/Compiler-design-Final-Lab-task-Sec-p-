@@ -1,46 +1,24 @@
+//....mid......1…….
+
 #include <iostream>
 
+using namespace std;
 
+bool isNumeric(string s) {
 
-bool isValidRegex(const char* str) {
+    if (s.length() == 0) return false;
 
+    for (int i = 0; i < s.length(); i++) {
 
+        // '0'–'9' => ASCII 48–57
 
-    if (str[0] == '\0') return false;
-
-    int i = 0;
-
-
-
-    while (str[i] != '\0') {
-
-
-        while (str[i] == 'a') {
-
-            i++;
-
-        }
-
-
-
-        if (str[i] != 'b') {
+        if (!(s[i] >= 48 && s[i] <= 57)) {
 
             return false;
 
         }
 
-
-
-        while (str[i] == 'b') {
-
-            i++;
-
-        }
-
-
-
     }
-
 
     return true;
 
@@ -48,39 +26,191 @@ bool isValidRegex(const char* str) {
 
 int main() {
 
+    string input;
+
+    cout << "Enter input: ";
+
+    cin >> input;
+
+    if (isNumeric(input))
+
+        cout << "Numeric Constant" << endl;
+
+    else
+
+        cout << "Not Numeric" << endl;
+
+    return 0;
+
+}
 
 
-    const char* testCases[5] = {
+ /*
 
-        "ab",       // Case 1: Expected Accepted
 
-        "aaabb",    // Case 2: Expected Accepted
+//....2....
 
-        "bbab",     // Case 3: Expected Accepted (b followed by ab)
+#include <iostream>
 
-        "a",        // Case 4: Expected Rejected (No 'b' to close it)
+using namespace std;
 
-        "aba"       // Case 5: Expected Rejected (Ends with 'a')
+void checkOperator(string s) {
 
-    };
+    bool found = false;
 
-    std::cout << "--- Regex [a*(b+) + ab]+ Validation --- \n\n";
+    for (int i = 0; i < s.length(); i++) {
 
-    for (int i = 0; i < 5; i++) {
+        // + - * / % =
 
-        std::cout << "Test Case " << i + 1 << ": \"" << testCases[i] << "\" -> ";
+        if (s[i] == 43 || s[i] == 45 || s[i] == 42 ||
 
-        if (isValidRegex(testCases[i])) {
+            s[i] == 47 || s[i] == 37 || s[i] == 61) {
 
-            std::cout << "ACCEPTED\n";
+            cout << "Operator found: " << s[i] << endl;
 
-        } else {
-
-            std::cout << "REJECTED\n";
+            found = true;
 
         }
 
     }
+
+    if (!found)
+
+        cout << "No Operator Found" << endl;
+
+}
+
+int main() {
+
+    string input;
+
+    cout << "Enter expression: ";
+
+    cin >> input;
+
+    checkOperator(input);
+
+    return 0;
+
+}
+ */
+
+
+
+ /*
+//.......3……
+
+#include <iostream>
+
+using namespace std;
+
+bool isComment(string s) {
+
+    if (s.length() < 2) return false;
+
+    // //  (47,47)
+
+    if (s[0] == 47 && s[1] == 47)
+
+        return true;
+
+    // /*  (47,42)
+
+    if (s[0] == 47 && s[1] == 42)
+
+        return true;
+
+    return false;
+
+}
+
+int main() {
+
+    string input;
+
+    cout << "Enter line: ";
+
+    getline(cin, input);
+
+    if (isComment(input))
+
+        cout << "It is a Comment line" << endl;
+
+    else
+
+        cout << "Not a Comment" << endl;
+
+    return 0;
+
+}
+
+
+
+*/
+
+
+
+//.............4.........
+
+/*
+
+#include <iostream>
+
+using namespace std;
+
+bool isIdentifier(string s) {
+
+    if (s.length() == 0) return false;
+
+
+
+    if (!((s[0] >= 65 && s[0] <= 90) ||
+
+          (s[0] >= 97 && s[0] <= 122) ||
+
+          (s[0] == 95))) {
+
+        return false;
+
+    }
+
+
+
+    for (int i = 1; i < s.length(); i++) {
+
+        if (!((s[i] >= 65 && s[i] <= 90) ||
+
+              (s[i] >= 97 && s[i] <= 122) ||
+
+              (s[i] >= 48 && s[i] <= 57) ||
+
+              (s[i] == 95))) {
+
+            return false;
+
+        }
+
+    }
+
+    return true;
+
+}
+
+int main() {
+
+    string input;
+
+    cout << "Enter identifier: ";
+
+    cin >> input;
+
+    if (isIdentifier(input))
+
+        cout << "Valid Identifier" << endl;
+
+    else
+
+        cout << "Invalid Identifier" << endl;
 
     return 0;
 
